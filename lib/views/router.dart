@@ -33,22 +33,22 @@ class _MyAppRouteState extends State<MyAppRoute> {
               icon: Icon(
                 Icons.home,
               ),
-              label: "Home"),
+              label: ""),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.book_rounded,
               ),
-              label: "Courses"),
+              label: ""),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.help,
               ),
-              label: "Help"),
+              label: ""),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.settings,
               ),
-              label: "Settings"),
+              label: ""),
         ],
         currentIndex: currentIndex,
         onTap: (value) {

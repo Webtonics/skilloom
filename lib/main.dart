@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:skilloom/views/app_screen/home.dart';
+import 'package:skilloom/views/auth/login.dart';
 import 'package:skilloom/views/router.dart';
 
 import 'firebase_options.dart';
@@ -21,14 +22,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Skilloom App',
-      theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.deepPurple,
-              elevation: 1,
-              selectedItemColor: Colors.deepPurple,
-              unselectedItemColor: Colors.grey)),
-      home: const MyAppRoute(),
+      theme: ThemeData.dark().copyWith(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.deepPurple,
+            elevation: 1,
+            selectedItemColor: Colors.deepPurple,
+            unselectedItemColor: Colors.grey),
+      ),
+      home: const LoginScreen(),
     );
   }
 }
