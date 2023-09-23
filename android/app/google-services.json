@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981749862755",
+    "project_id": "skilloom",
+    "storage_bucket": "skilloom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981749862755:android:f52b46b8fc982c560ec356",
+        "android_client_info": {
+          "package_name": "com.example.skilloom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwJBJl9BTH-sqQfkYXTwvKbkzx-OOc-uw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
