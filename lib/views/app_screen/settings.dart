@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skilloom/Services/authservice/user_services.dart';
+import 'package:skilloom/views/auth/login.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -10,9 +12,20 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Settings"),
+        child: Column(
+          children: [
+            const Text("Settings"),
+            IconButton(
+                onPressed: () {
+                  AuthService().signout();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: ((context) => const LoginScreen())));
+                },
+                icon: const Icon(Icons.logout))
+          ],
+        ),
       ),
     );
   }

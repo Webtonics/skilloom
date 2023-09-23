@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:skilloom/views/app_screen/home.dart';
@@ -29,7 +30,22 @@ class MyApp extends StatelessWidget {
             selectedItemColor: Colors.deepPurple,
             unselectedItemColor: Colors.grey),
       ),
-      home: const LoginScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
+              return const MyAppRoute();
+            } else if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return const LoginScreen();
+        },
+      ),
     );
   }
 }

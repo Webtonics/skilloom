@@ -60,4 +60,8 @@ class AuthService {
         await _firebaseFirestore.collection('users').doc(currentUser.uid).get();
     return model.User.fromJson(documentSnapshot as String);
   }
+
+  signout() {
+    _auth.signOut();
+  }
 }

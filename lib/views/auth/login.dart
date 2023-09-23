@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/views/auth/signup.dart';
+import 'package:skilloom/views/router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -65,7 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 70)),
               onPressed: _login,
+              // onPressed: () => Navigator.of(context).pushReplacement(
+              //     MaterialPageRoute(
+              //         builder: ((context) => const MyAppRoute()))),
               child: const Text('Login'),
             ),
 

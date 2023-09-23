@@ -8,8 +8,9 @@ class StorageService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<String> upload(Uint8List item, String childname) async {
+    String user = _auth.currentUser!.uid;
     //get reference
-    Reference ref = _storage.ref().child(childname);
+    Reference ref = _storage.ref("Profilepics").child(user);
     //upload task
     UploadTask uploadTask = ref.putData(item);
 
