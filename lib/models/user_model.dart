@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class User {
   final String uid;
@@ -23,6 +25,15 @@ class User {
       'photoURL': photoURL,
       'role': role,
     };
+  }
+
+  static User fromFireJson(DocumentSnapshot snap) {
+    var snaphot = snap.data() as Map<String, dynamic>;
+    return User(
+        uid: snaphot['uid'],
+        email: snaphot['email'],
+        displayName: snaphot['displayName'],
+        role: snaphot['role']);
   }
 
   factory User.fromMap(Map<String, dynamic> map) {

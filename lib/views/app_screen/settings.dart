@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
@@ -15,8 +16,20 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   @override
+  void initState() {
+    addUserProvider();
+    super.initState();
+  }
+
+  //function to add user provider
+  addUserProvider() async {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    await userProvider.refreshUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // User user = Provider.of<UserProvider>(context).getUser;
+    User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -24,9 +37,10 @@ class _SettingScreenState extends State<SettingScreen> {
           child: Column(
             children: [
               const Text("Settings"),
-              // Text(user.displayName),
-              // Text(user.email),
-              // Text(user.role),
+
+              Text(user!.displayName),
+              Text(user.email),
+              Text(user.role),
               // Text(user.uid),
               // Image(image: NetworkImage(user.photoURL!)),
               IconButton(

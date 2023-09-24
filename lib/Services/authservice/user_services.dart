@@ -54,11 +54,27 @@ class AuthService {
     return res;
   }
 
+  // Future<model.User> getUserDetails() async {
+  //   User currentUser = _auth.currentUser!;
+  //   DocumentSnapshot documentSnapshot =
+  //       await _firebaseFirestore.collection('users').doc(currentUser.uid).get();
+  //   return model.User.fromJson(documentSnapshot as String);
+  // }
+
   Future<model.User> getUserDetails() async {
-    User currentUser = _auth.currentUser!;
-    DocumentSnapshot documentSnapshot =
-        await _firebaseFirestore.collection('users').doc(currentUser.uid).get();
-    return model.User.fromJson(documentSnapshot as String);
+    User? currentUser = _auth.currentUser;
+
+    if (currentUser != null) {
+      DocumentSnapshot documentSnapshot = await _firebaseFirestore
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+      return model.User.fromFireJson(documentSnapshot);
+    } else {
+      // Handle the case where the user is not authenticated or currentUser is null.
+      // You might want to return a default user or throw an error.
+      throw Exception('User is not authenticated');
+    }
   }
 
   signout() {

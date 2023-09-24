@@ -1,9 +1,12 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:skilloom/providers/user_provider.dart';
 import 'package:skilloom/views/app_screen/courses.dart';
 import 'package:skilloom/views/app_screen/home.dart';
 import 'package:skilloom/views/app_screen/settings.dart';
 
+import '../models/user_model.dart';
 import 'app_screen/help.dart';
 
 class MyAppRoute extends StatefulWidget {
@@ -14,6 +17,18 @@ class MyAppRoute extends StatefulWidget {
 }
 
 class _MyAppRouteState extends State<MyAppRoute> {
+  @override
+  void initState() {
+    addUserProvider();
+    super.initState();
+  }
+
+  //function to add user provider
+  addUserProvider() async {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    await userProvider.refreshUser();
+  }
+
   int currentIndex = 0;
   List<Widget> pages = const [
     HomeScreen(),
@@ -21,6 +36,7 @@ class _MyAppRouteState extends State<MyAppRoute> {
     HelpScreen(),
     SettingScreen()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

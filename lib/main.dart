@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Skilloom App',
-        theme: ThemeData.dark().copyWith(
+        theme: ThemeData.light().copyWith(
+          primaryColor: Colors.white,
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.deepPurple,
               elevation: 1,
