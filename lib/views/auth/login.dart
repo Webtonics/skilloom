@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -32,11 +33,17 @@ class _LoginScreenState extends State<LoginScreen> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    if (email.isNotEmpty && password.isNotEmpty) {
-      await AuthService().signin(email, password);
-      // For now, we just print the email and password
-      print('Email: $email');
-      print('Password: $password');
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        setState(() {
+          _isLoading = true;
+        });
+        await AuthService().signin(email, password);
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const MyAppRoute()));
+      }
+    } catch (e) {
+      print(e.toString());
     }
   }
 
@@ -65,15 +72,23 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 20.0),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 70)),
-              onPressed: _login,
-              // onPressed: () => Navigator.of(context).pushReplacement(
-              //     MaterialPageRoute(
-              //         builder: ((context) => const MyAppRoute()))),
-              child: const Text('Login'),
-            ),
+            _isLoading
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 70)),
+                    onPressed: () {},
+                    child: const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 70)),
+                    onPressed: _login,
+                    child: const Text('Login'),
+                  ),
 
             //bottom
             Row(
