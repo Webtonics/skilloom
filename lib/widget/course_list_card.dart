@@ -5,10 +5,12 @@ class CourseListCard extends StatelessWidget {
       {super.key,
       required this.action,
       required this.title,
-      required this.subtitle});
+      required this.subtitle,
+      required this.image});
   final VoidCallback action;
   final String title;
   final String subtitle;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CourseListCard extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(color: Colors.white),
         child: ListTile(
-          // leading: Image(image: AssetImage("assetName")),
+          leading: CircleAvatar(child: Image(image: NetworkImage(image))),
           title: Text(title),
           subtitle: Text(subtitle),
           trailing: const Icon(

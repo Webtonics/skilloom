@@ -110,6 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
                         title: title,
                         subtitle: subtitle,
+                        image:
+                            'https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y291cnNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
                       );
                     }),
               ),

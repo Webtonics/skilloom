@@ -42,7 +42,8 @@ class _MyAppRouteState extends State<MyAppRoute> {
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.red,
+        fixedColor: Colors.deepPurple,
+        unselectedItemColor: Colors.purple[200],
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         items: const [
