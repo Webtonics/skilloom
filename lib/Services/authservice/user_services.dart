@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:skilloom/Services/storageservice/storage_service.dart';
 import 'package:skilloom/models/user_model.dart' as model;
@@ -8,7 +8,7 @@ import 'package:skilloom/models/user_model.dart' as model;
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  final FirebaseStorage _storage = FirebaseStorage.instance;
+  // final FirebaseStorage _storage = FirebaseStorage.instance;
 
   //Create User
   Future<String> signup(String displayName, String email, String role,
