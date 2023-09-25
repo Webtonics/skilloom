@@ -42,29 +42,30 @@ class _MyAppRouteState extends State<MyAppRoute> {
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.white,
-        backgroundColor: Colors.deepPurple,
+        fixedColor: Colors.red,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
         items: const [
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
               ),
-              label: ""),
+              label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.book_rounded,
               ),
-              label: ""),
+              label: "Courses"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.help,
               ),
-              label: ""),
+              label: "Help"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.settings,
               ),
-              label: ""),
+              label: "Settings"),
         ],
         currentIndex: currentIndex,
         onTap: (value) {

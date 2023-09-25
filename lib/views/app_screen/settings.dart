@@ -15,9 +15,10 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  late Future<void> _init;
   @override
   void initState() {
-    addUserProvider();
+    _init = addUserProvider();
     super.initState();
   }
 
@@ -30,27 +31,32 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     User? user = Provider.of<UserProvider>(context).getUser;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Text("Settings"),
+    return FutureBuilder(
+      future: _init,
+      builder: (context, snapshot) => Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Column(
+                children: [
+                  const Text("Settings"),
 
-              Text(user!.displayName),
-              Text(user.email),
-              Text(user.role),
-              // Text(user.uid),
-              // Image(image: NetworkImage(user.photoURL!)),
-              IconButton(
-                  onPressed: () {
-                    AuthService().signout();
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: ((context) => const LoginScreen())));
-                  },
-                  icon: const Icon(Icons.logout))
-            ],
+                  // Text(user.displayName),
+                  // Text(user.email),
+                  // Text(user.role),
+                  // Text(user.uid),
+                  // Image(image: NetworkImage(user.photoURL!)),
+                  IconButton(
+                      onPressed: () {
+                        AuthService().signout();
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: ((context) => const LoginScreen())));
+                      },
+                      icon: const Icon(Icons.logout))
+                ],
+              ),
+            ),
           ),
         ),
       ),

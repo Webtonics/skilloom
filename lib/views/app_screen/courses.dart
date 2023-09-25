@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Courses extends StatefulWidget {
   const Courses({super.key});
@@ -10,9 +11,10 @@ class Courses extends StatefulWidget {
 class _CoursesState extends State<Courses> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Courses"),
+        // child: Text("Courses"),
+        child: Lottie.asset("assets/animation_lmxx36vm.json"),
       ),
     );
   }
