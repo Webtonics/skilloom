@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:skilloom/models/user_model.dart';
+import 'package:skilloom/providers/user_provider.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/spacing.dart';
@@ -18,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       backgroundColor: scaffoldColor,
       body: SafeArea(
@@ -28,14 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(
                   child: ListTile(
-                    leading: const CircleAvatar(
+                    leading: CircleAvatar(
                       radius: 20,
-                      backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"),
+                      // backgroundImage: NetworkImage(
+                      //     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"),
+                      // backgroundImage: NetworkImage(user.photoURL!),
                     ),
-                    title: Text("Muhammad Murad",
+                    title: Text("Welcome ${user.displayName}",
                         style: GoogleFonts.poppins(
-                            color: Colors.black, fontSize: 15)),
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold)),
                     subtitle: Text(
                       "Student Account",
                       style: GoogleFonts.poppins(

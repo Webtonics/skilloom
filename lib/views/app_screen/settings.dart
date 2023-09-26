@@ -34,9 +34,9 @@ class _SettingScreenState extends State<SettingScreen> {
     return FutureBuilder(
         future: _init,
         builder: (context, snapshot) {
-          // User? user = Provider.of<UserProvider>(context).getUser;
-          User? user = context.read<UserProvider>().getUser;
-          if (snapshot.hasData == false) {
+          User? user = Provider.of<UserProvider>(context).getUser;
+          // User? user = context.read<UserProvider>().getUser;
+          if (snapshot.hasData) {
             return Scaffold(
               body: SafeArea(
                 child: Padding(
@@ -46,9 +46,9 @@ class _SettingScreenState extends State<SettingScreen> {
                       children: [
                         const Text("Settings"),
                         Expanded(child: Text(user.displayName)),
-                        // Expanded(child: Text(user.email)),
-                        // Text(user.role),
-                        // Text(user.uid),
+                        Expanded(child: Text(user.email)),
+                        Text(user.role),
+                        Text(user.uid),
                         // Expanded(
                         //     child: Image(image: NetworkImage(user.photoURL))),
                         IconButton(

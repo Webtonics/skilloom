@@ -26,7 +26,8 @@ class _MyAppRouteState extends State<MyAppRoute> {
 
   //function to add user provider
   addUserProvider() async {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
   }
 
@@ -41,44 +42,51 @@ class _MyAppRouteState extends State<MyAppRoute> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _init,
-      builder: (context, snapshot) => Scaffold(
-        body: pages[currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          fixedColor: Colors.deepPurple,
-          unselectedItemColor: Colors.purple[200],
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                label: "Home"),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.book_rounded,
-                ),
-                label: "Courses"),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.help,
-                ),
-                label: "Help"),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.settings,
-                ),
-                label: "Settings"),
-          ],
-          currentIndex: currentIndex,
-          onTap: (value) {
-            setState(() {
-              currentIndex = value;
-            });
-          },
-        ),
-      ),
-    );
+        future: _init,
+        builder: (context, snapshot) {
+          if (snapshot.hasData == false) {
+            return Scaffold(
+              body: pages[currentIndex],
+              bottomNavigationBar: BottomNavigationBar(
+                fixedColor: Colors.deepPurple,
+                unselectedItemColor: Colors.black54,
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: Colors.white,
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.home,
+                      ),
+                      label: "Home"),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.book_rounded,
+                      ),
+                      label: "Courses"),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.help,
+                      ),
+                      label: "Help"),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.settings,
+                      ),
+                      label: "Settings"),
+                ],
+                currentIndex: currentIndex,
+                onTap: (value) {
+                  setState(() {
+                    currentIndex = value;
+                  });
+                },
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return const Text("An error occured");
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
