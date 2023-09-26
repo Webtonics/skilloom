@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:skilloom/providers/user_provider.dart';
 // import 'package:skilloom/views/app_screen/home.dart';
 import 'package:skilloom/views/auth/login.dart';
+import 'package:skilloom/views/onboarding/onboarding.dart';
 import 'package:skilloom/views/router.dart';
 
 import 'firebase_options.dart';

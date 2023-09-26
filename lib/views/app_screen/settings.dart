@@ -36,7 +36,7 @@ class _SettingScreenState extends State<SettingScreen> {
         builder: (context, snapshot) {
           User? user = Provider.of<UserProvider>(context).getUser;
           // User? user = context.read<UserProvider>().getUser;
-          if (snapshot.hasData) {
+          if (snapshot.hasData == false) {
             return Scaffold(
               body: SafeArea(
                 child: Padding(
