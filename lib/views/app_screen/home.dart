@@ -32,16 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(
                   child: ListTile(
-                    leading: CircleAvatar(
+                    leading: const CircleAvatar(
                       radius: 20,
-                      // backgroundImage: NetworkImage(
-                      //     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"),
+                      backgroundImage: NetworkImage(
+                          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"),
                       // backgroundImage: NetworkImage(user.photoURL!),
                     ),
                     title: Text("Welcome ${user.displayName}",
+                        maxLines: 1,
                         style: GoogleFonts.poppins(
                             color: Colors.black,
-                            fontSize: 17,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold)),
                     subtitle: Text(
                       "Student Account",

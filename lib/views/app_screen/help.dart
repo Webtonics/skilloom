@@ -60,7 +60,9 @@ class _HelpScreenState extends State<HelpScreen> {
           onPressed: () {
             _launchURL();
           },
-          child: const Text("Chat ")),
+          child: const Icon(Icons.contact_support)
+          // const Text("Chat ")
+          ),
     );
   }
 }

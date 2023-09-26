@@ -21,7 +21,7 @@ class MyTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide.none,
         ),
-        fillColor: Colors.white,
+        fillColor: Colors.white54,
         filled: true,
       ),
     );

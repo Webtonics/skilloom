@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
+import 'package:skilloom/constants/colors.dart';
 import 'package:skilloom/providers/user_provider.dart';
 import 'package:skilloom/utils/elevated_buttons.dart';
 import 'package:skilloom/utils/textfiels.dart';
@@ -46,6 +47,7 @@ class _SettingScreenState extends State<SettingScreen> {
           // User? user = context.read<UserProvider>().getUser;
           if (snapshot.hasData == false) {
             return Scaffold(
+              backgroundColor: scaffoldColor,
               body: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

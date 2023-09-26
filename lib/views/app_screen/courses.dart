@@ -35,20 +35,20 @@ class _CoursesState extends State<Courses> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(19),
                       // color: Colors.greenAccent,
-                      color: Colors.black54,
+                      color: Colors.deepOrangeAccent,
                     ),
                     child: Row(children: [
                       //image
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Lets Learn More",
+                            "Track Your Progress",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 26,
+                              fontSize: 20,
                             ),
                           ),
                           TextButton(
@@ -56,9 +56,10 @@ class _CoursesState extends State<Courses> {
                               child: const Text(
                                 "Get Started",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    decoration: TextDecoration.underline),
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ))
                         ],
                       ),

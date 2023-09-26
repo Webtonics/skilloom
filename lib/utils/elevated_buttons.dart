@@ -20,7 +20,7 @@ class MyElevattedButton extends StatelessWidget {
         child: Text(
           title,
           style: GoogleFonts.poppins(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+              color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
         ));
   }
 }
