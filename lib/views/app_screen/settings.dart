@@ -24,42 +24,54 @@ class _SettingScreenState extends State<SettingScreen> {
 
   //function to add user provider
   addUserProvider() async {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    User? user = Provider.of<UserProvider>(context).getUser;
     return FutureBuilder(
-      future: _init,
-      builder: (context, snapshot) => Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Column(
-                children: [
-                  const Text("Settings"),
-
-                  // Text(user.displayName),
-                  // Text(user.email),
-                  // Text(user.role),
-                  // Text(user.uid),
-                  // Image(image: NetworkImage(user.photoURL!)),
-                  IconButton(
-                      onPressed: () {
-                        AuthService().signout();
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: ((context) => const LoginScreen())));
-                      },
-                      icon: const Icon(Icons.logout))
-                ],
+        future: _init,
+        builder: (context, snapshot) {
+          // User? user = Provider.of<UserProvider>(context).getUser;
+          User? user = context.read<UserProvider>().getUser;
+          if (snapshot.hasData == false) {
+            return Scaffold(
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        const Text("Settings"),
+                        Expanded(child: Text(user.displayName)),
+                        // Expanded(child: Text(user.email)),
+                        // Text(user.role),
+                        // Text(user.uid),
+                        // Expanded(
+                        //     child: Image(image: NetworkImage(user.photoURL))),
+                        IconButton(
+                            onPressed: () {
+                              AuthService().signout();
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const LoginScreen())));
+                            },
+                            icon: const Icon(Icons.logout))
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
+            );
+          }
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          } else {
+            return const CircularProgressIndicator();
+          }
+        });
   }
 }
