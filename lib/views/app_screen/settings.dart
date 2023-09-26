@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/providers/user_provider.dart';
+import 'package:skilloom/utils/elevated_buttons.dart';
+import 'package:skilloom/utils/textfiels.dart';
 import 'package:skilloom/views/auth/login.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/user_model.dart';
 
@@ -15,10 +18,15 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+
   late Future<void> _init;
   @override
   void initState() {
     _init = addUserProvider();
+    _emailController = TextEditingController();
+    _usernameController = TextEditingController();
     super.initState();
   }
 
@@ -45,10 +53,24 @@ class _SettingScreenState extends State<SettingScreen> {
                     child: Column(
                       children: [
                         const Text("Settings"),
-                        Expanded(child: Text(user.displayName)),
-                        Expanded(child: Text(user.email)),
-                        Text(user.role),
-                        Text(user.uid),
+                        const CircleAvatar(
+                          radius: 60,
+                          backgroundColor: Colors.deepPurple,
+                        ),
+                        //username
+                        MyTextField(
+                            controller: _usernameController,
+                            label: "Username",
+                            hinttext: user.displayName),
+                        //email
+                        MyTextField(
+                            controller: _emailController,
+                            label: "Email Address",
+                            hinttext: user.email),
+                        //Button
+                        MyElevattedButton(
+                            title: "Update Settings", action: () {}),
+
                         // Expanded(
                         //     child: Image(image: NetworkImage(user.photoURL))),
                         IconButton(
