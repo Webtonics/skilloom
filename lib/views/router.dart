@@ -44,7 +44,7 @@ class _MyAppRouteState extends State<MyAppRoute> {
     return FutureBuilder(
         future: _init,
         builder: (context, snapshot) {
-          if (snapshot.hasData == false) {
+          if (snapshot.hasData) {
             return Scaffold(
               body: pages[currentIndex],
               bottomNavigationBar: BottomNavigationBar(
