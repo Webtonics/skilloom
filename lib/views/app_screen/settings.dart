@@ -33,11 +33,15 @@ class _SettingScreenState extends State<SettingScreen> {
     super.initState();
   }
 
-  updateUser() {
+  updateUser() async {
     // bool updateuser = true;
-    setState(() {
-      updateuser = !updateuser;
-    });
+
+    await AuthService()
+        .updateUserInfo(_emailController.text, _usernameController.text);
+
+    // setState(() {
+    //   updateuser = false;
+    // });
   }
 
   @override
@@ -94,11 +98,16 @@ class _SettingScreenState extends State<SettingScreen> {
                         spacingH,
 
                         //Button
-                        MyElevattedButton(
-                            title: updateuser
-                                ? "Update Settings"
-                                : "Change Setting",
-                            action: updateUser),
+                        GestureDetector(
+                          onTap: () => setState(() {
+                            updateuser = !updateuser;
+                          }),
+                          child: MyElevattedButton(
+                              title: updateuser
+                                  ? "Update Settings"
+                                  : "Change Setting",
+                              action: updateUser),
+                        ),
                       ],
                     ),
                   ),

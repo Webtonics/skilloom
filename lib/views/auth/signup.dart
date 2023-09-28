@@ -58,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 5, right: 16, bottom: 4, left: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Enter your username',
               ),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 15.0),
             TextFormField(
               controller: _emailController,
               decoration: const InputDecoration(
@@ -92,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Enter your email',
               ),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 15.0),
             TextFormField(
               controller: _passwordController,
               obscureText: true,
@@ -101,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 hintText: 'Enter your password',
               ),
             ),
-            const SizedBox(height: 20.0),
+            const SizedBox(height: 15.0),
 
             // DropdownButtonFormField(items: [], onChanged: (){}),
             Padding(

@@ -29,15 +29,6 @@ class UserProvider with ChangeNotifier {
   User? get getUser => _user;
   bool get isLoading => _isLoading;
 
-  // Future<void> refreshUser() async {
-  //   _isLoading = true;
-  //   notifyListeners();
-
-  //   User user = await _authService.getUserDetails();
-  //   _user = user;
-  //   _isLoading = false;
-  //   notifyListeners();
-  // }
   Future<void> refreshUser() async {
     _isLoading = true;
     notifyListeners();

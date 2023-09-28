@@ -75,6 +75,22 @@ class AuthService {
     return model.User.fromFireJson(documentSnapshot);
   }
 
+  Future<void> updateUserInfo(String email, String username) async {
+    User user = _auth.currentUser!;
+
+    try {
+      await _firebaseFirestore
+          .collection("users")
+          .doc(user.uid)
+          .update(<String, dynamic>{
+        'displayName': username,
+        'email': email,
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   signout() {
     _auth.signOut();
   }
