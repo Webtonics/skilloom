@@ -63,9 +63,15 @@ class AuthService {
 
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
-
+    // print(currentUser.email);
     DocumentSnapshot documentSnapshot =
         await _firebaseFirestore.collection('users').doc(currentUser.uid).get();
+    // var snapshot = documentSnapshot.data() as Map<String, dynamic>;
+    // print(snapshot['email']);
+    // print(snapshot['photoURL']);
+    // print(snapshot['displayName']);
+    // print(snapshot['role']);
+
     return model.User.fromFireJson(documentSnapshot);
   }
 

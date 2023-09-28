@@ -27,7 +27,7 @@ class User {
   static User fromFireJson(DocumentSnapshot snap) {
     var snaphot = snap.data() as Map<String, dynamic>;
     return User(
-        photoURL: snaphot['photoUrl'],
+        photoURL: snaphot['photoURL'],
         uid: snaphot['uid'],
         email: snaphot['email'],
         displayName: snaphot['displayName'],
