@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/constants/colors.dart';
@@ -22,6 +23,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  bool updateuser = false;
 
   // late Future<void> _init;
   @override
@@ -31,6 +33,13 @@ class _SettingScreenState extends State<SettingScreen> {
     super.initState();
   }
 
+  updateUser() {
+    // bool updateuser = true;
+    setState(() {
+      updateuser = !updateuser;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     User? user = Provider.of<UserProvider>(context).getUser;
@@ -38,8 +47,14 @@ class _SettingScreenState extends State<SettingScreen> {
       return Scaffold(
         backgroundColor: scaffoldColor,
         appBar: AppBar(
-          backgroundColor: Colors.black54,
-          title: const Text("S E T T I N G S"),
+          backgroundColor: Colors.deepOrange,
+          title: Text(
+            "S E T T I N G S",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -55,25 +70,39 @@ class _SettingScreenState extends State<SettingScreen> {
                 //username
                 spacingH,
                 Expanded(
-                  child: MyTextField(
-                    controller: _usernameController,
-                    label: "Username",
-                    hinttext: user.displayName,
-                    keyboardtype: TextInputType.text,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        MyTextField(
+                          controller: _usernameController,
+                          label: "Change Username",
+                          hinttext: user.displayName,
+                          keyboardtype: TextInputType.text,
+                          enabled: updateuser,
+                        ),
+                        //email
+                        spacingH,
+                        MyTextField(
+                          controller: _emailController,
+                          label: "Change Email Address",
+                          // label: "",
+                          hinttext: user.email,
+                          keyboardtype: TextInputType.emailAddress,
+                          enabled: updateuser,
+                        ),
+                        spacingH,
+                        spacingH,
+
+                        //Button
+                        MyElevattedButton(
+                            title: updateuser
+                                ? "Update Settings"
+                                : "Change Setting",
+                            action: updateUser),
+                      ],
+                    ),
                   ),
                 ),
-                //email
-                spacingH,
-                MyTextField(
-                  controller: _emailController,
-                  // label: "Email Address",
-                  label: "",
-                  hinttext: user.email,
-                  keyboardtype: TextInputType.emailAddress,
-                ),
-                spacingH,
-                //Button
-                MyElevattedButton(title: "Update Settings", action: () {}),
 
                 spacingH,
                 IconButton(

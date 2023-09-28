@@ -6,14 +6,17 @@ class MyTextField extends StatelessWidget {
       required this.controller,
       required this.label,
       required this.hinttext,
-      required this.keyboardtype});
+      required this.keyboardtype,
+      required this.enabled});
   final TextEditingController controller;
   final String label;
   final String hinttext;
   final TextInputType keyboardtype;
+  final bool enabled;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: enabled,
       controller: controller,
       decoration: InputDecoration(
         floatingLabelBehavior: null,

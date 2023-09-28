@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:skilloom/constants/spacing.dart';
-import 'package:skilloom/widget/carosel_baner.dart';
 
 class Courses extends StatefulWidget {
   const Courses({super.key});
@@ -15,7 +14,15 @@ class _CoursesState extends State<Courses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My courses"),
+        backgroundColor: Colors.deepOrange,
+        centerTitle: true,
+        title: Text(
+          "My Courses",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
