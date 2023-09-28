@@ -67,10 +67,6 @@ class AuthService {
     DocumentSnapshot documentSnapshot =
         await _firebaseFirestore.collection('users').doc(currentUser.uid).get();
     return model.User.fromFireJson(documentSnapshot);
-
-    // Handle the case where the user is not authenticated or currentUser is null.
-    // You might want to return a default user or throw an error.
-    // throw Exception('User is not authenticated');
   }
 
   signout() {

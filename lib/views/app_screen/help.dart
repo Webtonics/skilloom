@@ -12,7 +12,7 @@ class HelpScreen extends StatefulWidget {
 
 class _HelpScreenState extends State<HelpScreen> {
   _launchURL() async {
-    const url = 'https://www.linkedin.com/in/camplodge-inc-22031226a/';
+    const url = 'https://chat.whatsapp.com/IR3D78azfzvGoSGPgPSS4u';
     if (await canLaunchUrl(Uri.parse(url))) {
       await launchUrl(
         Uri.parse(url),
@@ -39,20 +39,24 @@ class _HelpScreenState extends State<HelpScreen> {
         children: [
           spacingH,
           //video
-          const Text(
-              "Skilloom is an Asynchronous Elearning App developed for my final year Project."),
+          const Expanded(
+            child: Text(
+                "Skilloom is an Asynchronous Elearning App developed for my final year Project."),
+          ),
           const Text(
               "The app helps to Connect Teachers such as Lecturers and student"),
           spacingH,
-          Container(
-            color: Colors.deepPurple,
-            width: double.infinity,
-            height: 300,
-            child: const Center(
-                child: Text(
-              "Video of help ",
-              style: TextStyle(color: Colors.white),
-            )),
+          Expanded(
+            child: Container(
+              color: Colors.deepPurple,
+              width: double.infinity,
+              height: 300,
+              child: const Center(
+                  child: Text(
+                "Video of help ",
+                style: TextStyle(color: Colors.white),
+              )),
+            ),
           )
         ],
       ),

@@ -22,80 +22,126 @@ class _SettingScreenState extends State<SettingScreen> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
-  late Future<void> _init;
+  // late Future<void> _init;
   @override
   void initState() {
-    _init = addUserProvider();
+    // _init = addUserProvider();
     _emailController = TextEditingController();
     _usernameController = TextEditingController();
     super.initState();
   }
 
   //function to add user provider
-  addUserProvider() async {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
-    await userProvider.refreshUser();
-  }
+  // addUserProvider() async {
+  //   UserProvider userProvider =
+  //       Provider.of<UserProvider>(context, listen: false);
+  //   await userProvider.refreshUser();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: _init,
-        builder: (context, snapshot) {
-          User? user = Provider.of<UserProvider>(context).getUser;
-          // User? user = context.read<UserProvider>().getUser;
-          if (snapshot.hasData == false) {
-            return Scaffold(
-              backgroundColor: scaffoldColor,
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        const Text("Settings"),
-                        const CircleAvatar(
-                          radius: 60,
-                          backgroundColor: Colors.deepPurple,
-                        ),
-                        //username
-                        MyTextField(
-                            controller: _usernameController,
-                            label: "Username",
-                            hinttext: user.displayName),
-                        //email
-                        MyTextField(
-                            controller: _emailController,
-                            label: "Email Address",
-                            hinttext: user.email),
-                        //Button
-                        MyElevattedButton(
-                            title: "Update Settings", action: () {}),
-
-                        // Expanded(
-                        //     child: Image(image: NetworkImage(user.photoURL))),
-                        IconButton(
-                            onPressed: () {
-                              AuthService().signout();
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const LoginScreen())));
-                            },
-                            icon: const Icon(Icons.logout))
-                      ],
-                    ),
-                  ),
+    User? user = Provider.of<UserProvider>(context).getUser;
+    return Scaffold(
+      backgroundColor: scaffoldColor,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              children: [
+                const Text("Settings"),
+                const CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.deepPurple,
                 ),
-              ),
-            );
-          }
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else {
-            return const CircularProgressIndicator();
-          }
-        });
+                //username
+                MyTextField(
+                  controller: _usernameController,
+                  label: "Username",
+                  // hinttext: "user.displayName"
+                  hinttext: user!.displayName,
+                ),
+                //email
+                MyTextField(
+                    controller: _emailController,
+                    label: "Email Address",
+                    hinttext: "user.email"),
+                //Button
+                MyElevattedButton(title: "Update Settings", action: () {}),
+
+                // Expanded(
+                //     child: Image(image: NetworkImage(user.photoURL))),
+                IconButton(
+                    onPressed: () {
+                      AuthService().signout();
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: ((context) => const LoginScreen())));
+                    },
+                    icon: const Icon(Icons.logout))
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    // return FutureBuilder(
+    //     future: _init,
+    //     builder: (context, snapshot) {
+    //       User? user = Provider.of<UserProvider>(context).getUser;
+    //       // User? user = context.read<UserProvider>().getUser;
+    //       if (snapshot.hasData == false) {
+    //     //     return Scaffold(
+    //       backgroundColor: scaffoldColor,
+    //       body: SafeArea(
+    //         child: Padding(
+    //           padding: const EdgeInsets.all(8.0),
+    //           child: Center(
+    //             child: Column(
+    //               children: [
+    //                 const Text("Settings"),
+    //                 const CircleAvatar(
+    //                   radius: 60,
+    //                   backgroundColor: Colors.deepPurple,
+    //                 ),
+    //                 //username
+    //                 MyTextField(
+    //                   controller: _usernameController,
+    //                   label: "Username",
+    //                   // hinttext: "user.displayName"
+    //                   hinttext: user!.displayName,
+    //                 ),
+    //                 //email
+    //                 MyTextField(
+    //                     controller: _emailController,
+    //                     label: "Email Address",
+    //                     hinttext: "user.email"),
+    //                 //Button
+    //                 MyElevattedButton(
+    //                     title: "Update Settings", action: () {}),
+
+    //                 // Expanded(
+    //                 //     child: Image(image: NetworkImage(user.photoURL))),
+    //                 IconButton(
+    //                     onPressed: () {
+    //                       AuthService().signout();
+    //                       Navigator.of(context).pushReplacement(
+    //                           MaterialPageRoute(
+    //                               builder: ((context) =>
+    //                                   const LoginScreen())));
+    //                     },
+    //                     icon: const Icon(Icons.logout))
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //     );
+    //   }
+    //   if (snapshot.hasError) {
+    //     return Text(snapshot.error.toString());
+    //   } else {
+    //     return const CircularProgressIndicator();
+    //   }
+    // });
   }
 }
