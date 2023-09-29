@@ -37,7 +37,6 @@ class UserProvider with ChangeNotifier {
       User user = await _authService.getUserDetails();
       _user = user;
     } catch (error) {
-      // Handle any errors that occur during data fetching.
       print("Error fetching user data: $error");
     } finally {
       _isLoading = false;

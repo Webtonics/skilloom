@@ -40,10 +40,19 @@ class _CoursesState extends State<Courses> {
                     height: 120,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      // color: Colors.greenAccent,
-                      color: Colors.deepOrangeAccent,
-                    ),
+                        borderRadius: BorderRadius.circular(19),
+                        // color: Colors.greenAccent,
+                        // color: Colors.deepOrangeAccent,
+                        color: Colors.black,
+                        image: DecorationImage(
+                            // invertColors: true,
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.6),
+                                BlendMode.darken),
+                            // opacity: 0.6,
+                            image: const NetworkImage(
+                                "https://images.unsplash.com/photo-1618044733300-9472054094ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRhdGElMjBhbmFseXNpc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"))),
                     child: Row(children: [
                       //image
                       Column(
@@ -95,9 +104,23 @@ class _CoursesState extends State<Courses> {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
+                            padding: const EdgeInsets.all(5),
                             width: 120,
                             height: 80,
-                            color: Colors.deepOrange,
+                            decoration: BoxDecoration(
+                                color: Colors.deepOrange,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Column(
+                              children: const [
+                                Expanded(
+                                  child: Image(
+                                    image: NetworkImage(
+                                        "https://img.freepik.com/free-photo/medium-shot-man-waving-laptop_23-2149045941.jpg?size=626&ext=jpg"),
+                                  ),
+                                ),
+                                Text("Title"),
+                              ],
+                            ),
                           ),
                         );
                       }),

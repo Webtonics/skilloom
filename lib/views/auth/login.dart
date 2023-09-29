@@ -49,65 +49,67 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                hintText: 'Enter your email',
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
-              ),
-            ),
-            const SizedBox(height: 20.0),
-            _isLoading
-                ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 70)),
-                    onPressed: () {},
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 70)),
-                    onPressed: _login,
-                    child: const Text('Login'),
-                  ),
-
-            //bottom
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Don't have an account?",
-                  style: Theme.of(context).textTheme.bodyLarge,
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: ((context) => const SignUpScreen())));
-                    },
-                    child: const Text("Signup"))
-              ],
-            )
-          ],
+              ),
+              const SizedBox(height: 20.0),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              _isLoading
+                  ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 70)),
+                      onPressed: () {},
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 70)),
+                      onPressed: _login,
+                      child: const Text('Login'),
+                    ),
+
+              //bottom
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Don't have an account?",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: ((context) => const SignUpScreen())));
+                      },
+                      child: const Text("Signup"))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

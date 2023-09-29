@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/Services/hyperlink/hyperlink_sevice.dart';
 import 'package:skilloom/constants/spacing.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,44 +28,47 @@ class _HelpScreenState extends State<HelpScreen> {
           ),
         ),
       ),
-      body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          spacingH,
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Colors.deepPurple,
-              width: double.infinity,
-              height: 300,
-              child: const Center(
-                  child: Text(
-                "Video of help ",
-                style: TextStyle(color: Colors.white),
-              )),
-            ),
-          ),
-          spacingH,
-          Expanded(
-              flex: 1,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            spacingH,
+            Expanded(
+              flex: 2,
               child: Container(
-                child: Column(
-                  children: [
-                    Text(
-                        "Skilloom is an Asynchronous Elearning App developed for my final year Project.",
-                        style: GoogleFonts.poppins(
-                            fontSize: 19, fontWeight: FontWeight.w500)),
-                    spacingH,
-                    Text(
-                        "The app helps to Connect Teachers such as Lecturers and student",
-                        style: GoogleFonts.poppins(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                  ],
-                ),
-              )),
-          spacingH,
-        ],
+                color: Colors.deepPurple,
+                width: double.infinity,
+                height: 300,
+                child: const Center(
+                    child: Text(
+                  "Video of help ",
+                  style: TextStyle(color: Colors.white),
+                )),
+              ),
+            ),
+            spacingH,
+            Expanded(
+                flex: 1,
+                child: Container(
+                  child: Column(
+                    children: [
+                      Text(
+                          "Skilloom is an Asynchronous Elearning App developed for my final year Project.",
+                          style: GoogleFonts.poppins(
+                              fontSize: 19, fontWeight: FontWeight.w500)),
+                      spacingH,
+                      Text(
+                          "The app helps to Connect Teachers such as Lecturers and student",
+                          style: GoogleFonts.poppins(
+                              fontSize: 14, fontWeight: FontWeight.w500)),
+                    ],
+                  ),
+                )),
+            spacingH,
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
