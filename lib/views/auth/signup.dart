@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
+import 'package:skilloom/utils/error_dialog.dart';
 import 'package:skilloom/views/auth/login.dart';
 import 'package:skilloom/views/router.dart';
 
+import '../../Services/authservice/auth_exception.dart';
 import '../../Services/uploader/uploader.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -35,8 +37,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await AuthService()
             .signup(username, email, "student", password, image!);
         res = "Success";
-      } catch (e) {
-        print(e.toString());
+      } on UserNotFoundAuthException {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const MyErrorDialog(
+                title: " Account Not Found",
+                content: "The details you provided cannot be found. try again",
+              );
+            });
+      } on InvalidEmailAuthException {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const MyErrorDialog(
+                title: "Invalid Email",
+                content:
+                    "The Email address you provided is invalid. Try again with a correct email. Please try again",
+              );
+            });
+      } on WrongPasswordAuthException {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const MyErrorDialog(
+                title: " Wrong Password",
+                content:
+                    "The Password you provided is not associated with the account. Please try again",
+              );
+            });
+      } on GenericAuthException {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const MyErrorDialog(
+                title: " Unexpected Error",
+                content:
+                    "This is an Unexpected error. Please restart the app or contact us in our handle",
+              );
+            });
       }
     }
 
@@ -112,10 +151,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 70)),
                   onPressed: () {
-                    if (image != null) {
+                    if (image != null &&
+                        _emailController.text != null &&
+                        _usernameController.text != null &&
+                        _passwordController.text != null) {
                       _signup();
                     } else {
-                      throw Exception();
+                      print("Null input");
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const MyErrorDialog(
+                              title: "Error",
+                              content: "The Details you provided is incorrect",
+                            );
+                          });
                     }
                   },
                   child: _isloading

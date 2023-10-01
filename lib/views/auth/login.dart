@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:skilloom/Services/authservice/auth_exception.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
+import 'package:skilloom/utils/error_dialog.dart';
 import 'package:skilloom/views/auth/signup.dart';
 import 'package:skilloom/views/router.dart';
 
@@ -32,19 +36,63 @@ class _LoginScreenState extends State<LoginScreen> {
   void _login() async {
     String email = _emailController.text;
     String password = _passwordController.text;
-
+    setState(() {
+      _isLoading = true;
+    });
     try {
-      if (email.isNotEmpty && password.isNotEmpty) {
-        setState(() {
-          _isLoading = true;
-        });
-        await AuthService().signin(email, password);
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const MyAppRoute()));
-      }
-    } catch (e) {
-      print(e.toString());
+      await AuthService().signin(email, password);
+    } on UserNotFoundAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Account Not Found",
+              content: "The details you provided cannot be found. try again",
+            );
+          });
+    } on InvalidEmailAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: "Invalid Email",
+              content:
+                  "The Email address you provided is invalid. Try again with a correct email. Please try again",
+            );
+          });
+    } on WrongPasswordAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Wrong Password",
+              content:
+                  "The Password you provided is not associated with the account. Please try again",
+            );
+          });
+    } on MissingPasswordAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Missing Password",
+              content: "The Password Field is missing please check again.",
+            );
+          });
+    } on GenericAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Unexpected Error",
+              content:
+                  "This is an Unexpected error. Please restart the app or contact us in our handle",
+            );
+          });
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override

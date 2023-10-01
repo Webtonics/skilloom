@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:skilloom/Services/authservice/auth_exception.dart';
 import 'package:skilloom/Services/storageservice/storage_service.dart';
 import 'package:skilloom/models/user_model.dart' as model;
 
@@ -35,22 +36,49 @@ class AuthService {
           .doc(cred.user!.uid)
           .set(userinfo.toMap());
       res = "Successful";
-    } catch (e) {
-      print(e.toString());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        throw WeakPasswordAuthException();
+      } else if (e.code == 'email-already-in-use') {
+        throw EmailAlreadyinUseAuthException();
+      } else if (e.code == 'invalid-email') {
+        throw InvalidEmailAuthException();
+      } else if (e.code == "missing-password") {
+        throw MissingPasswordAuthException();
+      } else {
+        throw GenericAuthException();
+      }
+    } catch (_) {
+      throw GenericAuthException();
     }
-
     return res;
   }
 
   //login user
   Future<String> signin(String email, String password) async {
-    String res = " An error occured";
+    String res = ' An error occured';
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       res = "Success";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-login-credentials') {
+        throw UserNotFoundAuthException();
+      } else if (e.code == 'invalid-email') {
+        throw InvalidEmailAuthException();
+      } else if (e.code == 'user-not-found') {
+        throw UserNotFoundAuthException();
+      } else if (e.code == 'wrong-password') {
+        throw WrongPasswordAuthException();
+      } else if (e.code == 'missing-password') {
+        throw MissingPasswordAuthException();
+      } else {
+        print(e.code);
+        throw GenericAuthException();
+      }
     } catch (e) {
-      print(e.toString());
+      throw GenericAuthException();
     }
+
     return res;
   }
 

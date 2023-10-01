@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/constants/spacing.dart';
 
 class Courses extends StatefulWidget {
@@ -23,6 +24,13 @@ class _CoursesState extends State<Courses> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                AuthService().signout();
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

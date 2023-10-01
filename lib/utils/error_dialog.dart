@@ -5,15 +5,16 @@ class MyErrorDialog extends StatelessWidget {
     super.key,
     required this.title,
     required this.content,
-    required this.icon,
+    // required this.icon,
   });
   final String title;
   final String content;
-  final IconData icon;
+  // final IconData icon;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      icon: Icon(icon),
+      titleTextStyle: const TextStyle(color: Colors.red, fontSize: 20),
+      icon: const Icon(Icons.warning),
       title: Text(title),
       content: Text(content),
       actions: [
