@@ -29,60 +29,71 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String password = _passwordController.text;
     String res = "an error occured";
 
-    if (username.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
-      try {
-        setState(() {
-          _isloading = true;
-        });
-        await AuthService()
-            .signup(username, email, "student", password, image!);
-        res = "Success";
-      } on UserNotFoundAuthException {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const MyErrorDialog(
-                title: " Account Not Found",
-                content: "The details you provided cannot be found. try again",
-              );
-            });
-      } on InvalidEmailAuthException {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const MyErrorDialog(
-                title: "Invalid Email",
-                content:
-                    "The Email address you provided is invalid. Try again with a correct email. Please try again",
-              );
-            });
-      } on WrongPasswordAuthException {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const MyErrorDialog(
-                title: " Wrong Password",
-                content:
-                    "The Password you provided is not associated with the account. Please try again",
-              );
-            });
-      } on GenericAuthException {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const MyErrorDialog(
-                title: " Unexpected Error",
-                content:
-                    "This is an Unexpected error. Please restart the app or contact us in our handle",
-              );
-            });
-      }
+    setState(() {
+      _isloading = true;
+    });
+
+    try {
+      await AuthService().signup(username, email, "student", password, image!);
+      res = "Success";
+    } on EmailAlreadyinUseAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Email Already in Use",
+              content:
+                  "The Email address you provided is associated with another account.",
+            );
+          });
+    } on InvalidEmailAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: "Invalid Email",
+              content:
+                  "The Email address you provided is invalid. Try again with a correct email. Please try again",
+            );
+          });
+    } on MissingPasswordAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Missing Password",
+              content: "The Password Field is missing please check again.",
+            );
+          });
+    } on WeakPasswordAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Weak Password",
+              content:
+                  "The Password you provided is not Secure try a combination of 8 (Letters/symbols/numbers). Please try again",
+            );
+          });
+    } on GenericAuthException {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const MyErrorDialog(
+              title: " Unexpected Error",
+              content:
+                  "This is an Unexpected error. Please restart the app or contact us in our handle",
+            );
+          });
     }
 
     if (res == "Success") {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const MyAppRoute()));
     }
+    setState(() {
+      _isloading = false;
+    });
     print(res);
   }
 
@@ -151,19 +162,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 70)),
                   onPressed: () {
-                    if (image != null &&
-                        _emailController.text != null &&
-                        _usernameController.text != null &&
-                        _passwordController.text != null) {
+                    if (image != null && _usernameController.text.isNotEmpty) {
                       _signup();
+                    } else if (_usernameController.text.isEmpty) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const MyErrorDialog(
+                              title: "Enter a Username",
+                              content:
+                                  "You need to Enter your username to continue",
+                            );
+                          });
                     } else {
                       print("Null input");
                       showDialog(
                           context: context,
                           builder: (context) {
                             return const MyErrorDialog(
-                              title: "Error",
-                              content: "The Details you provided is incorrect",
+                              title: "Upload a Profile picture",
+                              content:
+                                  "You need to upload a profile picture to continue",
                             );
                           });
                     }
@@ -175,7 +194,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 20,
                             child: const CircularProgressIndicator(
                               color: Colors.white,
-                              value: 10,
                             ),
                           ),
                         )

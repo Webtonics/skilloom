@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/constants/colors.dart';
 import 'package:skilloom/constants/spacing.dart';
+import 'package:skilloom/main.dart';
 import 'package:skilloom/providers/user_provider.dart';
 import 'package:skilloom/utils/elevated_buttons.dart';
 import 'package:skilloom/utils/textfiels.dart';
@@ -118,7 +119,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     onPressed: () {
                       AuthService().signout();
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: ((context) => const LoginScreen())));
+                          builder: ((context) => const MyAppRoutes())));
                     },
                     icon: const Icon(Icons.logout))
               ],

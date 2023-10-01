@@ -27,33 +27,41 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Skilloom App',
-        theme: ThemeData.light().copyWith(
-          primaryColor: Colors.white,
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.deepPurple,
-              elevation: 1,
-              selectedItemColor: Colors.deepPurple,
-              unselectedItemColor: Colors.grey),
-        ),
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
-              if (snapshot.hasData) {
-                return const MyAppRoute();
-              } else if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
-              }
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return const LoginScreen();
-          },
-        ),
-      ),
+          debugShowCheckedModeBanner: false,
+          title: 'Skilloom App',
+          theme: ThemeData.light().copyWith(
+            primaryColor: Colors.white,
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                backgroundColor: Colors.deepPurple,
+                elevation: 1,
+                selectedItemColor: Colors.deepPurple,
+                unselectedItemColor: Colors.grey),
+          ),
+          home: const MyAppRoutes()),
+    );
+  }
+}
+
+class MyAppRoutes extends StatelessWidget {
+  const MyAppRoutes({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          if (snapshot.hasData) {
+            return const MyAppRoute();
+          } else if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return const LoginScreen();
+      },
     );
   }
 }
