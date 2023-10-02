@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:skilloom/Services/authservice/auth_exception.dart';
 import 'package:skilloom/Services/authservice/user_services.dart';
 import 'package:skilloom/utils/error_dialog.dart';
+import 'package:skilloom/views/auth/forgot_password.dart';
 import 'package:skilloom/views/auth/signup.dart';
 import 'package:skilloom/views/router.dart';
 
@@ -155,6 +156,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: const Text("Signup"))
                 ],
+              ),
+
+              Center(
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotPasswordScreen()));
+                    },
+                    child: const Text("Forgot password")),
               )
             ],
           ),

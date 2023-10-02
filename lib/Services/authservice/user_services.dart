@@ -36,6 +36,7 @@ class AuthService {
           .doc(cred.user!.uid)
           .set(userinfo.toMap());
       res = "Successful";
+      sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw WeakPasswordAuthException();
@@ -121,5 +122,22 @@ class AuthService {
 
   signout() {
     _auth.signOut();
+  }
+
+  Future<void> sendEmailVerification() async {
+    await _auth.currentUser!.sendEmailVerification();
+  }
+
+  Future<String> forgotPassword(String email) async {
+    String res = "an error occurred";
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      res = "Successful";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        throw InvalidEmailAuthException();
+      }
+    }
+    return res;
   }
 }

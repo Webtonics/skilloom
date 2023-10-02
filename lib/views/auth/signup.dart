@@ -88,6 +88,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     if (res == "Success") {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Verification email sent. Please check your inbox.')));
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const MyAppRoute()));
     }
