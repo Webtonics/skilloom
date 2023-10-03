@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +8,6 @@ import 'package:skilloom/main.dart';
 import 'package:skilloom/providers/user_provider.dart';
 import 'package:skilloom/utils/elevated_buttons.dart';
 import 'package:skilloom/utils/textfiels.dart';
-import 'package:skilloom/views/auth/login.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/user_model.dart';
 

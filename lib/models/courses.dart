@@ -4,8 +4,8 @@ class Courses {
   final String courseId;
   final String title;
   final String description;
-  final lessons;
-  final studentEnrolled;
+  final lessons; // list of videos
+  final studentEnrolled; //list of students
   final String instructor;
   final assignments;
   final quizzes;

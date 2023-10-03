@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:skilloom/Services/firestoreservice/firestore_service.dart';
 import 'package:skilloom/Services/uploader/note_uploader.dart';
 import 'package:skilloom/models/user_model.dart';
 import 'package:skilloom/providers/user_provider.dart';
@@ -30,26 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // print(user); // Check if user is not null.
 
     if (user != null) {
-      // return Center(
-      //   child: Column(
-      //     children: [
-      //       const Text("Home"),
-      //       Text(user.displayName),
-      //       Text(user.email),
-      //       Text(user.role),
-      //       Text(user.photoURL),
-      //       Text(user.uid),
-      //       IconButton(
-      //           onPressed: () {
-      //             addNote();
-      //           },
-      //           icon: const Icon(
-      //             Icons.upload_file,
-      //             size: 50,
-      //           ))
-      //     ],
-      //   ),
-      // );
       return Scaffold(
         backgroundColor: scaffoldColor,
         body: SafeArea(
@@ -128,28 +110,49 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Expanded(
-                  flex: 4,
-                  child: ListView.builder(
-                      itemCount: 20,
-                      itemBuilder: (context, index) {
-                        const title = "How to Fundraise";
-                        const subtitle =
-                            "Learning of Business in this field...";
-                        final bookName = "$title ${[index]}";
-                        return CourseListCard(
-                          action: () =>
-                              Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => CourseDetailsScreen(
-                                  courseName: bookName,
-                                )),
-                          )),
-                          title: title,
-                          subtitle: subtitle,
-                          image:
-                              'https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y291cnNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-                        );
-                      }),
-                ),
+                    flex: 4,
+                    child: StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('courses')
+                            .snapshots(),
+                        builder: ((context,
+                            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.active) {
+                            return ListView.builder(
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, index) {
+                                  final title = snapshot.data!.docs[index]
+                                      .data()['title']
+                                      .toString();
+                                  final subtitle = snapshot.data!.docs[index]
+                                      .data()['description'];
+                                  final bookName = snapshot.data!.docs[index]
+                                      .data()['title'];
+                                  return CourseListCard(
+                                      action: () => Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: ((context) =>
+                                                CourseDetailsScreen(
+                                                  courseName: bookName,
+                                                )),
+                                          )),
+                                      title: title,
+                                      subtitle: subtitle,
+                                      image: snapshot.data!.docs[index]
+                                          .data()['thumbnail']);
+                                });
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return const Center(
+                                child: Text("Unexpected error"));
+                          }
+                        }))),
               ],
             ),
           ),
