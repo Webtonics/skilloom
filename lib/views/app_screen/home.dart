@@ -112,9 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                     flex: 4,
                     child: StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection('courses')
-                            .snapshots(),
+                        stream: FirestoreService().getallCourses(),
                         builder: ((context,
                             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                                 snapshot) {
@@ -135,6 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .push(MaterialPageRoute(
                                             builder: ((context) =>
                                                 CourseDetailsScreen(
+                                                  snap: snapshot
+                                                      .data!.docs[index]
+                                                      .data(),
                                                   courseName: bookName,
                                                 )),
                                           )),

@@ -21,7 +21,10 @@ class CourseListCard extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(child: Image(image: NetworkImage(image))),
           title: Text(title),
-          subtitle: Text(subtitle),
+          subtitle: Text(
+            subtitle,
+            maxLines: 2,
+          ),
           trailing: const Icon(
             Icons.arrow_circle_right_outlined,
             color: Colors.black54,
