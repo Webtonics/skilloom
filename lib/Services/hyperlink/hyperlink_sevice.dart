@@ -9,6 +9,7 @@ class LinkService {
         Uri.parse(url),
       );
     } else {
+      // show url not found
       throw 'Could not launch $url';
     }
   }

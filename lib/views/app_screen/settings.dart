@@ -24,7 +24,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
-  bool updateuser = false;
+  bool updateuser = true;
 
   // late Future<void> _init;
   @override

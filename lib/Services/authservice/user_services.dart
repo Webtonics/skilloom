@@ -108,12 +108,11 @@ class AuthService {
     User user = _auth.currentUser!;
 
     try {
-      await _firebaseFirestore
-          .collection("users")
-          .doc(user.uid)
-          .update(<String, dynamic>{
-        'displayName': username,
+      await _firebaseFirestore.collection("users").doc(user.uid).update({
+        // 'email': FieldValue.arrayUnion([email]),
+        // 'displayName': FieldValue.arrayUnion([username]),
         'email': email,
+        'displayName': username
       });
     } catch (e) {
       print(e.toString());
