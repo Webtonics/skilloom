@@ -128,16 +128,30 @@ class AuthService {
     await _auth.currentUser!.sendEmailVerification();
   }
 
-  Future<String> forgotPassword(String email) async {
-    String res = "an error occurred";
+  // Future<String> forgotPassword(String email) async {
+  //   String res = "an error occurred";
+  //   try {
+  //     await _auth.sendPasswordResetEmail(email: email);
+  //     res = "Successful";
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'invalid-email') {
+  //       throw InvalidEmailAuthException();
+  //     }
+  //   }
+  //   return res;
+  // }
+  Future<void> forgotPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
     try {
       await _auth.sendPasswordResetEmail(email: email);
-      res = "Successful";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
         throw InvalidEmailAuthException();
+      } else if (e.code == 'missing-email') {
+        throw MissingEmailAuthException();
+      } else {
+        throw GenericAuthException();
       }
     }
-    return res;
   }
 }

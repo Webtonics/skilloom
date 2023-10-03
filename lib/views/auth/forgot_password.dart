@@ -16,16 +16,16 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
-  bool _isLoading = false;
+  // bool _isLoading = false;
 
-  void _resetPassword() {
-    String res = "an error occurred";
-    setState(() {
-      _isLoading = true;
-    });
+  void _resetPassword() async {
+    // String res = "an error occurred";
+    // setState(() {
+    //   _isLoading = true;
+    // });
     try {
-      AuthService().forgotPassword(_emailController.text);
-      res = "Sucessful";
+      await AuthService().forgotPassword(_emailController.text);
+      // res = "Sucessful";
     } on InvalidEmailAuthException {
       showDialog(
           context: context,
@@ -38,13 +38,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           });
     }
 
-    setState(() {
-      _isLoading = false;
-    });
-    if (res == 'Successful') {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Password reset Email Sent. Check your inbox")));
-    }
+    // setState(() {
+    //   _isLoading = false;
+    // });
+    // if (res == 'Successful') {
+    //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    //       content: Text("Password reset Email Sent. Check your inbox")));
+    // }
   }
 
   @override
@@ -64,31 +64,35 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   enabled: true),
               spacingH,
               spacingH,
-              _isLoading
-                  ? ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: BorderSide.none),
-                        backgroundColor: Colors.deepPurple,
-                      ),
-                      child: const CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    )
-                  : ElevatedButton(
-                      onPressed: _resetPassword,
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: BorderSide.none),
-                        backgroundColor: Colors.deepPurple,
-                      ),
-                      child: const Text("Password Reset"),
-                    )
+              // _isLoading
+              // ? ElevatedButton(
+              //     onPressed: () {},
+              //     style: ElevatedButton.styleFrom(
+              //       minimumSize: const Size(double.infinity, 50),
+              //       shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(12),
+              //           side: BorderSide.none),
+              //       backgroundColor: Colors.deepPurple,
+              //     ),
+              // child: const CircularProgressIndicator(
+              //   color: Colors.white,
+              // ),
+              // )
+              // :
+              ElevatedButton(
+                onPressed: () {
+                  AuthService().forgotPassword(_emailController.text);
+                  try {} catch (e) {}
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide.none),
+                  backgroundColor: Colors.deepPurple,
+                ),
+                child: const Text("Password Reset"),
+              )
             ],
           ),
         ),
