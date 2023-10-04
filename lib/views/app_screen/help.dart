@@ -73,8 +73,8 @@ class _HelpScreenState extends State<HelpScreen> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             // _launchURL();
-            LinkService()
-                .launchURL("https://chat.whatsapp.com/IR3D78azfzvGoSGPgPSS4u");
+            LinkService().launchURL(
+                "https://chat.whatsapp.com/IR3D78azfzvGoSGPgPSS4u", context);
           },
           child: const Icon(Icons.contact_support)
           // const Text("Chat ")

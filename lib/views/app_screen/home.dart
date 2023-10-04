@@ -128,21 +128,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .data()['description'];
                                   final bookName = snapshot.data!.docs[index]
                                       .data()['title'];
-                                  return CourseListCard(
-                                      action: () => Navigator.of(context)
-                                              .push(MaterialPageRoute(
-                                            builder: ((context) =>
-                                                CourseDetailsScreen(
-                                                  snap: snapshot
-                                                      .data!.docs[index]
-                                                      .data(),
-                                                  courseName: bookName,
-                                                )),
-                                          )),
-                                      title: title,
-                                      subtitle: subtitle,
-                                      image: snapshot.data!.docs[index]
-                                          .data()['thumbnail']);
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CourseListCard(
+                                        action: () => Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: ((context) =>
+                                                  CourseDetailsScreen(
+                                                    snap: snapshot
+                                                        .data!.docs[index]
+                                                        .data(),
+                                                    courseName: bookName,
+                                                  )),
+                                            )),
+                                        title: title,
+                                        subtitle: subtitle,
+                                        image: snapshot.data!.docs[index]
+                                            .data()['thumbnail']),
+                                  );
                                 });
                           } else if (snapshot.connectionState ==
                               ConnectionState.waiting) {

@@ -17,9 +17,16 @@ class CourseListCard extends StatelessWidget {
     return GestureDetector(
       onTap: action,
       child: Container(
-        decoration: const BoxDecoration(color: Colors.white),
+        width: double.infinity,
+        height: 100,
+        decoration: const BoxDecoration(
+            color: Colors.white, backgroundBlendMode: BlendMode.darken),
         child: ListTile(
-          leading: CircleAvatar(child: Image(image: NetworkImage(image))),
+          leading: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(2)),
+              child: Image(
+                image: NetworkImage(image),
+              )),
           title: Text(title),
           subtitle: Text(
             subtitle,
