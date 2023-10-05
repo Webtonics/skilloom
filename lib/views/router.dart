@@ -6,6 +6,7 @@ import 'package:skilloom/views/app_screen/courses.dart';
 import 'package:skilloom/views/app_screen/home.dart';
 import 'package:skilloom/views/app_screen/settings.dart';
 
+import '../Services/cloudmessaging/cloud_messaging.dart';
 import '../models/user_model.dart';
 import 'app_screen/help.dart';
 
@@ -20,6 +21,7 @@ class _MyAppRouteState extends State<MyAppRoute> {
   // late Future<void> _init;
   @override
   void initState() {
+    initializeMessage();
     addUserProvider();
     super.initState();
   }
@@ -29,6 +31,10 @@ class _MyAppRouteState extends State<MyAppRoute> {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
+  }
+
+  initializeMessage() async {
+    await FirebaseMessage().initNotification();
   }
 
   int currentIndex = 0;

@@ -48,6 +48,7 @@ dependencies:
   lottie:
   url_launcher: ^6.1.11
   file_picker: ^5.3.1
+  firebase_messaging: ^14.6.9
 
 dev_dependencies:
   flutter_test:
