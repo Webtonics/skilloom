@@ -20,8 +20,6 @@ class CourseDetailsScreen extends StatefulWidget {
 class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-
-    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.snap['title']),
@@ -70,7 +68,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                     child: ListView.builder(
                         itemCount: 10,
                         itemBuilder: ((context, index) {
-                          return const LessonList();
+                          return LessonList(
+                            index: index,
+                          );
                         }))),
               ),
             ],
@@ -87,15 +87,15 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   }
 }
 
-class VisdeoList extends StatelessWidget {
-  const VisdeoList({super.key});
+// class VisdeoList extends StatelessWidget {
+//   const VisdeoList({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 7,
-        itemBuilder: ((context, index) {
-          return const LessonList();
-        }));
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView.builder(
+//         itemCount: 7,
+//         itemBuilder: ((context, index) {
+//           return const LessonList();
+//         }));
+//   }
+// }
