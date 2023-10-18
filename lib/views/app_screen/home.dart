@@ -37,127 +37,132 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(1),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(user.photoURL),
-                      ),
-                      title: Text("Welcome ${user.displayName}",
-                          maxLines: 1,
+            child: Container(
+              height: double.maxFinite,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(5),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 20,
+                          backgroundImage: NetworkImage(user.photoURL),
+                        ),
+                        title: Text("Welcome ${user.displayName}",
+                            maxLines: 1,
+                            style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold)),
+                        subtitle: Text(
+                          "${user.role} Account",
                           style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold)),
-                      subtitle: Text(
-                        "${user.role} Account",
-                        style: GoogleFonts.poppins(
-                            color: Colors.black54, fontSize: 12),
-                        // style: TextStyle(color: Colors.black54, fontSize: 14, ),
-                      ),
-                      trailing: CircleAvatar(
-                        backgroundColor: Colors.white38,
-                        radius: 19,
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.notification_important,
-                              size: 21,
-                            )),
+                              color: Colors.black54, fontSize: 12),
+                          // style: TextStyle(color: Colors.black54, fontSize: 14, ),
+                        ),
+                        trailing: CircleAvatar(
+                          backgroundColor: Colors.white38,
+                          radius: 19,
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.notification_important,
+                                size: 21,
+                              )),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                spacingH,
-                spacingH,
+                  spacingH,
+                  spacingH,
 
-                //search
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          fillColor: Colors.white54,
-                          filled: true,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                  color: Colors.white, width: 0)),
-                          hintText: "Search Course",
-                          prefixIcon: const Icon(Icons.search)),
+                  //search
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            fillColor: Colors.white54,
+                            filled: true,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                    color: Colors.white, width: 0)),
+                            hintText: "Search Course",
+                            prefixIcon: const Icon(Icons.search)),
+                      ),
                     ),
                   ),
-                ),
-                spacingH,
-                spacingH,
+                  spacingH,
+                  spacingH,
 
-                spacingH,
-                //image
-                const Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: CaroselBanner(),
+                  spacingH,
+                  //image
+                  const Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: CaroselBanner(),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [const Text("Courses"), const Text("see all")],
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [const Text("Courses"), const Text("see all")],
+                    ),
                   ),
-                ),
-                Expanded(
-                    flex: 4,
-                    child: StreamBuilder(
-                        stream: FirestoreService().getallCourses(),
-                        builder: ((context,
-                            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                                snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.active) {
-                            return ListView.builder(
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (context, index) {
-                                  final title = snapshot.data!.docs[index]
-                                      .data()['title']
-                                      .toString();
-                                  final subtitle = snapshot.data!.docs[index]
-                                      .data()['description'];
-                                  final bookName = snapshot.data!.docs[index]
-                                      .data()['title'];
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: CourseListCard(
-                                        action: () => Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  CourseDetailsScreen(
-                                                    snap: snapshot
-                                                        .data!.docs[index]
-                                                        .data(),
-                                                    courseName: bookName,
-                                                  )),
-                                            )),
-                                        title: title,
-                                        subtitle: subtitle,
-                                        image: snapshot.data!.docs[index]
-                                            .data()['thumbnail']),
-                                  );
-                                });
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else {
-                            return const Center(
-                                child: Text("Unexpected error"));
-                          }
-                        }))),
-              ],
+                  Expanded(
+                      flex: 4,
+                      child: StreamBuilder(
+                          stream: FirestoreService().getallCourses(),
+                          builder: ((context,
+                              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                                  snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.active) {
+                              return ListView.builder(
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    final title = snapshot.data!.docs[index]
+                                        .data()['title']
+                                        .toString();
+                                    final subtitle = snapshot.data!.docs[index]
+                                        .data()['description'];
+                                    final bookName = snapshot.data!.docs[index]
+                                        .data()['title'];
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CourseListCard(
+                                          action: () => Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    CourseDetailsScreen(
+                                                      snap: snapshot
+                                                          .data!.docs[index]
+                                                          .data(),
+                                                      courseName: bookName,
+                                                    )),
+                                              )),
+                                          title: title,
+                                          subtitle: subtitle,
+                                          image: snapshot.data!.docs[index]
+                                              .data()['thumbnail']),
+                                    );
+                                  });
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return const Center(
+                                  child: Text("Unexpected error"));
+                            }
+                          }))),
+                ],
+              ),
             ),
           ),
         ),

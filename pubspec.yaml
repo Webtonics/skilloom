@@ -44,11 +44,12 @@ dependencies:
   uuid: ^4.0.0
   image_picker: ^1.0.4
   provider: ^6.0.5
-  google_fonts: ^4.0.4
+  # google_fonts: ^4.0.4
   lottie:
   url_launcher: ^6.1.11
   file_picker: ^5.3.1
   firebase_messaging: ^14.6.9
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:

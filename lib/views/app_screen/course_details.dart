@@ -20,6 +20,8 @@ class CourseDetailsScreen extends StatefulWidget {
 class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.snap['title']),
