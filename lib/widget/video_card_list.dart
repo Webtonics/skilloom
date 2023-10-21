@@ -24,7 +24,7 @@ class LessonList extends StatelessWidget {
           child: ListTile(
             leading: const Icon(
               Icons.play_circle,
-              size: 30,
+              size: 40,
             ),
             title: Text("Title $index"),
             subtitle: Text("This is the description of $index"),

@@ -32,13 +32,13 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Skilloom App',
           theme: ThemeData.light().copyWith(
-            primaryColor: Colors.white,
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                backgroundColor: Colors.deepPurple,
-                elevation: 1,
-                selectedItemColor: Colors.deepPurple,
-                unselectedItemColor: Colors.grey),
-          ),
+              primaryColor: Colors.white,
+              bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                  backgroundColor: Colors.deepPurple,
+                  elevation: 1,
+                  selectedItemColor: Colors.deepPurple,
+                  unselectedItemColor: Colors.grey),
+              useMaterial3: true),
           home: const MyAppRoutes()),
     );
   }
