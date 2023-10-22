@@ -20,7 +20,7 @@ class _CourseLessonState extends State<CourseLesson> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("widget.snap['title']"),
+        title: const Text("video title"),
       ),
       body: SingleChildScrollView(
         child: Padding(

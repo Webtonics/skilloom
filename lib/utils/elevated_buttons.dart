@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyElevattedButton extends StatelessWidget {
-  const MyElevattedButton(
-      {super.key, required this.title, required this.action});
+  const MyElevattedButton({
+    super.key,
+    this.color = Colors.deepPurple,
+    required this.title,
+    required this.action,
+  });
   final String title;
   final VoidCallback action;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,7 @@ class MyElevattedButton extends StatelessWidget {
           minimumSize: const Size(double.infinity, 50),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12), side: BorderSide.none),
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: color,
         ),
         child: Text(
           title,
