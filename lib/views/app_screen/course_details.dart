@@ -18,6 +18,15 @@ class CourseDetailsScreen extends StatefulWidget {
 }
 
 class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
+
+  bool enrolled = false;
+
+  //function to handle enroll task 
+  bool enroll(){
+    return true;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,24 +59,21 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                 child: Text("${widget.snap['description']} "),
               ),
               spacingH,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MyElevattedButton(
-                      title: "Enroll",
-                      color: Colors.black,
-                      action: () {
-                        LinkService()
-                            .launchURL(widget.snap['fullNote'], context);
-                      }),
-                  MyElevattedButton(
-                      title: "Full Note",
-                      action: () {
-                        LinkService()
-                            .launchURL(widget.snap['fullNote'], context);
-                      }),
-                ],
-              ),
+              
+              enrolled == false ? MyElevattedButton(
+                  title: "Enroll",
+                  color: Colors.black,
+                  action: () {
+                   setState(() {
+                     enrolled = true;
+                   });
+                  })
+              :MyElevattedButton(
+                  title: "Full Note",
+                  action: () {
+                    LinkService()
+                        .launchURL(widget.snap['fullNote'], context);
+                  }),
               spacingH,
               const Text(
                 "All Lessons",

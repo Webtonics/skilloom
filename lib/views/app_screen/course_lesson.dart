@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Services/hyperlink/hyperlink_sevice.dart';
 import '../../constants/spacing.dart';
 import '../../constants/theme/theme.dart';
 import '../../utils/elevated_buttons.dart';
@@ -35,7 +36,7 @@ class _CourseLessonState extends State<CourseLesson> {
                   child: Text("Video"),
                 ),
               ),
-
+      
               spacingH,
               const Center(
                 child: Text(
@@ -51,7 +52,7 @@ class _CourseLessonState extends State<CourseLesson> {
               MyElevattedButton(
                   title: "Full Note",
                   action: () {
-                    // LinkService().launchURL(widget.snap['fullNote'], context);
+                    LinkService().launchURL(widget.snap['fullNote'], context);
                   }),
               spacingH,
               const Text(
@@ -77,7 +78,7 @@ class _CourseLessonState extends State<CourseLesson> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // LinkService().launchURL(widget.snap['groupChat'], context);
+          LinkService().launchURL(widget.snap['groupChat'], context);
         },
         child: const Icon(Icons.chat),
       ),
