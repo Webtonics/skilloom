@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../Services/hyperlink/hyperlink_sevice.dart';
 import '../../constants/spacing.dart';
-import '../../constants/theme/theme.dart';
-import '../../utils/elevated_buttons.dart';
-import '../../widget/video_card_list.dart';
+// import '../../constants/theme/theme.dart';
+// import '../../utils/elevated_buttons.dart';
+// import '../../widget/video_card_list.dart';
 
 class CourseLesson extends StatefulWidget {
   const CourseLesson({
@@ -40,7 +40,7 @@ class _CourseLessonState extends State<CourseLesson> {
               spacingH,
               const Center(
                 child: Text(
-                  "${"widget.courseName"} information",
+                  "${"widget.snap[courseName]"} information",
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -49,29 +49,7 @@ class _CourseLessonState extends State<CourseLesson> {
                 child: Text("${"widget.snap['description']"} "),
               ),
               spacingH,
-              MyElevattedButton(
-                  title: "Full Note",
-                  action: () {
-                    LinkService().launchURL(widget.snap['fullNote'], context);
-                  }),
-              spacingH,
-              const Text(
-                "All Lessons",
-                style: headingSmall,
-              ),
-              spacingH,
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Container(
-              //       height: double.maxFinite,
-              //       child: ListView.builder(
-              //           itemCount: 10,
-              //           itemBuilder: ((context, index) {
-              //             return LessonList(
-              //               index: index,
-              //             );
-              //           }))),
-              // ),
+              
             ],
           ),
         ),

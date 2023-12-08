@@ -22,9 +22,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   bool enrolled = false;
 
   //function to handle enroll task 
-  bool enroll(){
-    return true;
-  }
+  // bool enroll(){
+  //   return true;
+  // }
 
 
   @override
@@ -34,11 +34,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
         title: Text(widget.snap['title']),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Container(
+        child: Column(
+          children: [
+            Container(
                 height: 250,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -46,54 +44,68 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                       image: NetworkImage("${widget.snap['thumbnail']}")),
                 ),
               ),
-              spacingH,
-              Center(
-                child: Text(
-                  "${widget.courseName} information",
-                  style: const TextStyle(
-                      fontSize: 17, fontWeight: FontWeight.bold),
-                ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  
+                  spacingH,
+                  Center(
+                    child: Text(
+                      "${widget.courseName} information",
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  spacingH,
+                  Center(
+                    child: Text("${widget.snap['description']} "),
+                  ),
+                  spacingH,
+                  
+                  enrolled == false ? MyElevattedButton(
+                      title: "Enroll",
+                      color: Colors.black,
+                      action: () {
+                       setState(() {
+                         enrolled = true;
+                       });
+                      })
+                  :MyElevattedButton(
+                      title: "Full Note",
+                      action: () {
+                        LinkService()
+                            .launchURL(widget.snap['fullNote'], context);
+                      }),
+                  spacingH,
+                  const Text(
+                    "All Lessons",
+                    style: headingSmall,
+                  ),
+                  spacingH,
+                  enrolled == true? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        height: 400,
+                        // height: double.maxFinite,
+                        child: ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: ((context, index) {
+                              return LessonList(
+                                index: index,
+                              );
+                            }))),
+                  ): Container(
+                    decoration: BoxDecoration( borderRadius: BorderRadius.circular(12),color: Colors.pink[100],),
+                    height: 200,
+                    child: const Center(
+                      child: Text("Enroll to see Courses", style: TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                  )
+                ],
               ),
-              spacingH,
-              Center(
-                child: Text("${widget.snap['description']} "),
-              ),
-              spacingH,
-              
-              enrolled == false ? MyElevattedButton(
-                  title: "Enroll",
-                  color: Colors.black,
-                  action: () {
-                   setState(() {
-                     enrolled = true;
-                   });
-                  })
-              :MyElevattedButton(
-                  title: "Full Note",
-                  action: () {
-                    LinkService()
-                        .launchURL(widget.snap['fullNote'], context);
-                  }),
-              spacingH,
-              const Text(
-                "All Lessons",
-                style: headingSmall,
-              ),
-              spacingH,
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                    height: double.maxFinite,
-                    child: ListView.builder(
-                        itemCount: 10,
-                        itemBuilder: ((context, index) {
-                          return LessonList(
-                            index: index,
-                          );
-                        }))),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
