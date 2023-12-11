@@ -5,7 +5,7 @@ Skilloom is an intuitive Learning Management System designed to facilitate seaml
 ## Features
 
 - **User Roles:**
-  - **Lecturers:** Create and manage courses, assignments, and assessments.
+  - **Lecturers:** Create and manage courses, assignments, and assessments(skilloom Cms).
   - **Students:** Access course materials, submit assignments, and engage in discussions.
 
 - **Course Management:**
