@@ -7,6 +7,7 @@ import 'package:skilloom/Services/firestoreservice/firestore_service.dart';
 import 'package:skilloom/Services/uploader/note_uploader.dart';
 import 'package:skilloom/models/user_model.dart';
 import 'package:skilloom/providers/user_provider.dart';
+import 'package:skilloom/views/app_screen/notifications.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/spacing.dart';
@@ -66,7 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           backgroundColor: Colors.white38,
                           radius: 19,
                           child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const NotificationScreen()));
+                              },
                               icon: const Icon(
                                 Icons.notification_important,
                                 size: 21,
@@ -107,10 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: CaroselBanner(),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [const Text("Courses"), const Text("see all")],
+                      children: [Text("Courses"), Text("see all")],
                     ),
                   ),
                   Expanded(
